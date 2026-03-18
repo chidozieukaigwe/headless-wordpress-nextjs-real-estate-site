@@ -1,3 +1,5 @@
+import { CallToActionButton } from "components/CallToActionButton";
+import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
 import { Heading } from "components/Heading";
 import { Paragraph } from "components/Paragraph/Paragraph";
@@ -6,6 +8,16 @@ import { theme } from "theme";
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
     switch (block.name) {
+      case "acf/cta-button": {
+        return (
+          <CallToActionButton
+            key={block.id}
+            buttonLabel={block.attributes.data.label}
+            destination={block.attributes.data.destination || "/"}
+            align={block.attributes.data.align}
+          />
+        );
+      }
       case "core/heading": {
         return (
           <Heading
@@ -37,7 +49,18 @@ export const BlockRenderer = ({ blocks }) => {
           </Cover>
         );
       }
+      case "core/columns": {
+        return (
+          <Columns
+            key={block.id}
+            isStackedOnMobile={block.attributes.isStackedOnMobile}
+          >
+            <BlockRenderer blocks={block.innerBlocks} />
+          </Columns>
+        );
+      }
       default: {
+        console.log("Unknwown Block:", block);
         return null;
       }
     }
