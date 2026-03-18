@@ -3,8 +3,9 @@ export const Columns = ({ isStackedOnMobile, children }) => {
     <div className="my-10">
       <div
         className={`max-w-5xl mx-auto ${isStackedOnMobile ? "block md:flex" : "flex"}`}
-      ></div>
-      {children}
+      >
+        {children}
+      </div>
     </div>
   );
 };

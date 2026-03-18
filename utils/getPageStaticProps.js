@@ -14,6 +14,11 @@ export const getPageStaticProps = async (context) => {
             id
             blocks(postTemplate: false)
           }
+          ... on Property {
+            id
+            title
+            blocks(postTemplate: false)
+          }
         }
         acfOptionsMainMenu {
           mainMenu {
