@@ -4,6 +4,7 @@ import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
 import { Heading } from "components/Heading";
 import { Paragraph } from "components/Paragraph/Paragraph";
+import { PropertySearch } from "components/PropertySearch";
 import Image from "next/image";
 import { theme } from "theme";
 
@@ -17,6 +18,19 @@ export const BlockRenderer = ({ blocks }) => {
             buttonLabel={block.attributes.data.label}
             destination={block.attributes.data.destination || "/"}
             align={block.attributes.data.align}
+          />
+        );
+      }
+      case "acf/property-search": {
+        return <PropertySearch key={block.id} />;
+      }
+      case "core/post-title": {
+        return (
+          <Heading
+            key={block.id}
+            textAlign={block.attributes.textAlign}
+            content={block.attributes.content}
+            level={block.attributes.level}
           />
         );
       }
