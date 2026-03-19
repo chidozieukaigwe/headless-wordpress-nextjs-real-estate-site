@@ -33,8 +33,11 @@ export const PropertySearch = () => {
   const pageSize = 3;
 
   const handlePageClick = async (pageNumber) => {
+    const { petFriendly, hasParking, minPrice, maxPrice } = queryString.parse(
+      window.location.search,
+    );
     await router.push(
-      `${router.query.slug.join("/")}?page=${pageNumber}`,
+      `${router.query.slug.join("/")}?page=${pageNumber}&petFriendly=${petFriendly === "true"}&hasParking=${!!hasParking}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
       null,
       {
         shallow: true,
@@ -53,7 +56,7 @@ export const PropertySearch = () => {
     // search
     console.log("FILTERS", { petFriendly, hasParking, minPrice, maxPrice });
     await router.push(
-      `${router.query.slug.join("/")}?page=1&petFriendly=${petFriendly}&hasParking=${hasParking}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
+      `${router.query.slug.join("/")}?page=1&petFriendly=${!!petFriendly}&hasParking=${!!hasParking}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
       null,
       {
         shallow: true,

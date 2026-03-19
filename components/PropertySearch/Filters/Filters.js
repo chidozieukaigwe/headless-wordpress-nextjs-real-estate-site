@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Input } from "components/Input";
+import queryString from "query-string";
 
 export const Filters = ({ onSearch }) => {
   const [petFriendly, setPetFriendly] = useState(false);
@@ -10,6 +11,19 @@ export const Filters = ({ onSearch }) => {
   const handleSearch = () => {
     onSearch({ petFriendly, hasParking, minPrice, maxPrice });
   };
+
+  useEffect(() => {
+    const {
+      petFriendly: petFriendlyInitial,
+      hasParking: hasParkingInitial,
+      minPrice: minPriceInitial,
+      maxPrice: maxPriceInitial,
+    } = queryString.parse(window.location.search);
+    setPetFriendly(petFriendlyInitial === "true");
+    setHasParking(hasParkingInitial === "true");
+    setMinPrice(minPriceInitial || "");
+    setMaxPrice(maxPriceInitial || "");
+  }, []);
 
   return (
     <div className="max-w-5xl mx-auto my-5 flex gap border-slate-400 border-2 p-5 rounded-md">
