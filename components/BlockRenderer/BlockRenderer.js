@@ -5,6 +5,7 @@ import { Cover } from "components/Cover";
 import { FormspreeForm } from "components/FormspreeForm";
 import { Heading } from "components/Heading";
 import { Paragraph } from "components/Paragraph/Paragraph";
+import { PropertyFeatures } from "components/PropertyFeatures";
 import { PropertySearch } from "components/PropertySearch";
 import Image from "next/image";
 import { theme } from "theme";
@@ -12,6 +13,18 @@ import { theme } from "theme";
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
     switch (block.name) {
+      case "acf/property-features": {
+        return (
+          <PropertyFeatures
+            key={block.id}
+            price={block.attributes.price}
+            bathrooms={block.attributes.bathrooms}
+            bedrooms={block.attributes.bedrooms}
+            hasParking={block.attributes.has_parking}
+            petFriendly={block.attributes.pet_friendly}
+          />
+        );
+      }
       case "acf/formspreeform": {
         return (
           <FormspreeForm
