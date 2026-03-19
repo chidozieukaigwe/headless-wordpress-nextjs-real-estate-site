@@ -3,6 +3,7 @@ import { Results } from "./Results";
 import { Pagination } from "./Pagination /Pagination";
 import { useRouter } from "next/router";
 import queryString from "query-string";
+import { Filters } from "./Filters";
 
 export const PropertySearch = () => {
   const [properties, setProperties] = useState([]);
@@ -39,6 +40,7 @@ export const PropertySearch = () => {
 
   return (
     <div>
+      <Filters />
       <Results properties={properties} />
       <Pagination
         onPageClick={handlePageClick}
